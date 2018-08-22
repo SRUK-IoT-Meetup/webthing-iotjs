@@ -32,8 +32,16 @@ eslint: .eslintrc.js
 	-which eslint || echo "# TODO: npm install eslint-plugin-node eslint"
 	eslint --init
 
-test:
+test/%: example/multiple-things.js
+	${@F} $< & pid=$$!
+	sleep 10
+	curl http://localhost:8888
+	kill $$pid
+
+test/node:
 	npm test || echo "TODO:"
+
+test: test/${runtime}
 
 node_modules: package.json
 	npm install
@@ -49,3 +57,42 @@ setup/node: package.json
 
 setup: setup/${runtime}
 
+babel: ./node_modules/.bin/babel
+	cat .babelrc
+	rm -rf dist
+	BABEL_ENV=production ./node_modules/.bin/babel .  --experimental --source-maps-inline -d ./dist --ignore 'node_modules/**'
+	rm -rf lib example *.js
+	cp -rfa dist/lib lib
+	cp -rfa dist/example example
+	cp -a dist/*.js .
+
+.babelrc:
+	ls $@ || echo '{ "ignore": [ "node_modules/**.js" ] }' > $@
+	touch $@
+
+babel/commit: .babelrc babel/runtime/node babel/runtime/iotjs
+
+babel/runtime/%:
+	-git commit -am "WIP: babel: About to babelize for ${@F}"
+	cp -av extra/${@F}/.babelrc .babelrc
+	-git commit -am "WIP: babel: About to babelize for ${@F}"
+	${MAKE} babel
+	-git commit -am "babel: Babelized for $@"
+
+./node_modules/.bin/babel: ./node_modules Makefile
+	-git commit -am "WIP: babel: About to babelize"
+	npm install @babel/cli
+	npm install @babel/core
+	npm install @babel/plugin-transform-arrow-functions
+	npm install @babel/plugin-transform-block-scoping
+	npm install @babel/plugin-transform-template-literals
+	echo "TODO: npm install @babel/plugin-transform-for-of"
+	echo "TODO: npm install @babel/plugin-transform-classes"
+	npm install @babel/preset-env
+	-git commit -am "WIP: babel: Installed tools"
+
+run/iotjs: ${main}
+	iotjs $<
+
+check/iotjs: ${srcs}
+	for src in $^; do iotjs $${src} ; done
