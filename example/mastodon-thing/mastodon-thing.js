@@ -8,13 +8,13 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.*
  */
-const {
-  Property,
-  SingleThing,
-  Thing,
-  Value,
-  WebThingServer,
-} = require('webthing');
+var webthing = require('webthing');
+
+var Property = webthing.Property;
+var SingleThing = webthing.server.SingleThing;
+var Thing = webthing.Thing;
+var Value = webthing.Value;
+var WebThingServer = webthing.server.WebThingServer;
 
 const fs = require('fs');
 const Mastodon = require('mastodon-lite');
