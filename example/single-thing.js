@@ -1,10 +1,14 @@
-const {
-  Property,
-  SingleThing,
-  Thing,
-  Value,
-  WebThingServer,
-} = require('webthing');
+let webthing;
+try {
+  webthing = require('webthing');
+} catch (err) {
+  webthing = require('../webthing');
+}
+const Property = webthing.Property;
+const SingleThing = webthing.server.SingleThing;
+const Thing = webthing.Thing;
+const Value = webthing.Value;
+const WebThingServer = webthing.server.WebThingServer;
 
 
 function makeThing() {
