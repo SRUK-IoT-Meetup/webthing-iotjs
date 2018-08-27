@@ -1,5 +1,6 @@
 // -*- mode: js; js-indent-level:2;  -*-
 // SPDX-License-Identifier: MPL-2.0
+
 /**
  *
  * Copyright 2018-present Samsung Electronics France SAS, and other contributors
@@ -8,13 +9,13 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.*
  */
-var webthing = require('webthing');
+const webthing = require('webthing');
 
-var Property = webthing.Property;
-var SingleThing = webthing.server.SingleThing;
-var Thing = webthing.Thing;
-var Value = webthing.Value;
-var WebThingServer = webthing.server.WebThingServer;
+const Property = webthing.Property;
+const SingleThing = webthing.server.SingleThing;
+const Thing = webthing.Thing;
+const Value = webthing.Value;
+const WebThingServer = webthing.server.WebThingServer;
 
 const fs = require('fs');
 const Mastodon = require('mastodon-lite');
