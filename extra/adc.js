@@ -10,28 +10,30 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.*
  */
 function Adc() {
+  var _this = this;
+
   this.DIRECTION = {
     "IN": "in",
     "OUT": "out"
   };
 
-  this.open = (config, callback) => {
-    console.log(`log: ADC: open:`);
+  this.open = function (config, callback) {
+    console.log("log: ADC: open:");
     callback(null);
-    return this;
+    return _this;
   };
 
-  this.readSync = err => {
-    console.log(`log: ADC: readSync: ${err}`);
+  this.readSync = function (err) {
+    console.log("log: ADC: readSync: ".concat(err));
     return true;
   };
 
-  this.closeSync = () => {
-    console.log(`log: ADC: closeSync:`);
+  this.closeSync = function () {
+    console.log("log: ADC: closeSync:");
   };
 
-  this.write = value => {
-    console.log(`log: ADC: write: ${value}`);
+  this.write = function (value) {
+    console.log("log: ADC: write: ".concat(value));
   };
 }
 

@@ -10,28 +10,30 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.*
  */
 function Gpio() {
+  var _this = this;
+
   this.DIRECTION = {
     "IN": "in",
     "OUT": "out"
   };
 
-  this.open = (config, callback) => {
-    console.log(`log: GPIO.open:`);
+  this.open = function (config, callback) {
+    console.log("log: GPIO.open:");
     callback(null);
-    return this;
+    return _this;
   };
 
-  this.readSync = err => {
-    console.log(`log: GPIO.readSync: ${err}`);
+  this.readSync = function (err) {
+    console.log("log: GPIO.readSync: ".concat(err));
     return true;
   };
 
-  this.closeSync = () => {
-    console.log(`log: GPIO.closeSync:`);
+  this.closeSync = function () {
+    console.log("log: GPIO.closeSync:");
   };
 
-  this.write = value => {
-    console.log(`log: GPIO: write: ${value}`);
+  this.write = function (value) {
+    console.log("log: GPIO: write: ".concat(value));
   };
 }
 
