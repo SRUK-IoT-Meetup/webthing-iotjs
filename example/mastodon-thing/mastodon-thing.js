@@ -24,7 +24,9 @@ const Value = webthing.Value;
 const WebThingServer = webthing.server.WebThingServer;
 
 const fs = require('fs');
+
 const Mastodon = require('mastodon-lite');
+
 const conf = '.mastodon-lite.json';
 const config = JSON.parse(fs.readFileSync(conf, 'utf8'));
 const mastodon = Mastodon(config);
@@ -38,26 +40,20 @@ function handleLevelUpdate(value) {
  ~ @TizenHelper`;
   console.log(message);
   const now = new Date();
-  if ((now - lastHandle) > 60 * 1000) {
+
+  if (now - lastHandle > 60 * 1000) {
     mastodon.post(message);
     lastHandle = now;
   }
 }
 
 function makeThing() {
-  const thing = new Thing('MastodonMultiLevelSwitchExample',
-                          'multiLevelSwitch',
-                          'An actuator example that just blog');
-
-  thing.addProperty(
-    new Property(thing,
-                 'level',
-                 new Value(0, handleLevelUpdate),
-                 {
-                   label: 'Level',
-                   type: 'number',
-                   description: 'Whether the output is changed',
-                 }));
+  const thing = new Thing('MastodonMultiLevelSwitchExample', 'multiLevelSwitch', 'An actuator example that just blog');
+  thing.addProperty(new Property(thing, 'level', new Value(0, handleLevelUpdate), {
+    label: 'Level',
+    type: 'number',
+    description: 'Whether the output is changed'
+  }));
   return thing;
 }
 
@@ -70,7 +66,6 @@ Try:\n
 curl -X PUT -H 'Content-Type: application/json' \
 --data '{"level": 42}' "${url}"\n
 `);
-
   const thing = makeThing();
   const server = new WebThingServer(new SingleThing(thing), port);
   process.on('SIGINT', () => {

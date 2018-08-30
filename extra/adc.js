@@ -9,29 +9,30 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.*
  */
-
 function Adc() {
   this.DIRECTION = {
     "IN": "in",
     "OUT": "out"
   };
-  
-  this.open  = (config, callback) => {
+
+  this.open = (config, callback) => {
     console.log(`log: ADC: open:`);
     callback(null);
     return this;
   };
 
-  this.readSync = (err) => {
+  this.readSync = err => {
     console.log(`log: ADC: readSync: ${err}`);
     return true;
-  }
+  };
+
   this.closeSync = () => {
-     console.log(`log: ADC: closeSync:`);
-  }
-  this.write = (value) => {
+    console.log(`log: ADC: closeSync:`);
+  };
+
+  this.write = value => {
     console.log(`log: ADC: write: ${value}`);
-  }
+  };
 }
 
 module.exports = new Adc();

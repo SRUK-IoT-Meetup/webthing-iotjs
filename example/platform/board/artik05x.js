@@ -16,9 +16,11 @@ try {
 } catch (err) {
   webthing = require('webthing');
 }
+
 const Thing = webthing.Thing;
 
 const AdcProperty = require('../adc/adc-property');
+
 const GpioProperty = require('../gpio/gpio-property');
 
 function ARTIK05xThing(name, type, description) {
