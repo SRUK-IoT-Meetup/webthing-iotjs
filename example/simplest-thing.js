@@ -9,6 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.*
  */
 let webthing;
+
 try {
   webthing = require('../webthing');
 } catch (err) {
