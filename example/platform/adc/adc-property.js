@@ -16,6 +16,7 @@ const console = require('console');
 const log = console.log || function() {};
 
 let webthing;
+
 try {
   webthing = require('../../../webthing');
 } catch (err) {
