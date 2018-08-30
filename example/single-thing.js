@@ -1,8 +1,9 @@
 let webthing;
+
 try {
-  webthing = require('webthing');
-} catch (err) {
   webthing = require('../webthing');
+} catch (err) {
+  webthing = require('webthing');
 }
 const Property = webthing.Property;
 const SingleThing = webthing.server.SingleThing;
